@@ -8,11 +8,16 @@
 
             bool isRunning = true;
             string menuPick;
+            Car[] NormalParking = new Car[12];
+            List<Car> QuantumParking = new List<Car>();
+
+
+            LoadRandomData(NormalParking,QuantumParking);
 
             while (isRunning)
             {
 
-                Console.Clear();  //Limpia la consola, para mas prolijidad
+                Console.Clear();
                 Console.Out.WriteLine("\n             Welcome to the Aperture Science              ");
                 Console.Out.WriteLine(" Parking Entry Non-symmetric Infinite System! (P.E.N.I.S).\n");
                 Console.Out.WriteLine("                     Management Menu                      ");
@@ -27,10 +32,10 @@
                 Console.Out.WriteLine("                  Please enter your Pick:                        ");
                 menuPick = Console.In.ReadLine();
 
-                switch (menuPick)                                                               //Se que el Switch causa alergia, pero pienso que en un menu encuentra uso apropiado. 
+                switch (menuPick)
                 {
                     case "1":
-                        //ListAllVehicles()
+                        ListAllVehicles(NormalParking, QuantumParking);
                         break;
                     case "2":
                         //AddNewVehicle();
@@ -48,20 +53,58 @@
                         //OptimiseParkingSpaces();
                         break;
                     default:
+                        Console.Clear();
                         Console.Out.WriteLine(" Pay attention to your inputs, please. (Press any key) ");
                         Console.In.ReadLine(); //No guarda el input, es una pausa.
                         break;
                 }
             }
+
+
+            void LoadRandomData(Car[] Normal, List<Car> Quantum)
+            {
+                for (int i = 0; i<Normal.Length;i++) //Esto llena el estacionamiento normal, para poder llegar a usar el quantum 
+                {
+                    Normal[i] = new Car();
+                    if ((i == 3 || i == 7 || i == 12) && (Normal[i].CheckVip() == false))
+                    {
+                        while (Normal[i].CheckVip() == false)
+                        {
+                            Quantum.Add(Normal[i]); //si no es vip, lo patea a la n dimension. no se que tan buena idea es pero funciona
+                            Normal[i] = new Car();
+                        }
+                    }
+                }
+                Random QuantumCarAmount = new Random();
+                for (int i = 0; i< QuantumCarAmount.Next(1, 100); i++)
+                {
+                    Quantum.Add(new Car());
+                }
+            }
+
+            void ListAllVehicles(Car[] Normal, List<Car> Quantum)
+            {
+                foreach (Car Vehicle in Normal)
+                {
+                    Vehicle.Show();
+                }
+                foreach (Car Vehicle in Quantum)
+                {
+                    Vehicle.Show();
+                }
+                Console.Out.WriteLine("(Press any key) ");
+                Console.In.ReadLine(); //No guarda el input, es una pausa.
+            }
         }
     }
 }
+
 
 /*
  * Un programa para administrar estacionamiento. 
  * 2 Estacionamientos, un estatico de 12 (array prob), y ahi las posiciones 3 , 7 , 12 estan reservadas
  * para VIPs, solo ocupables por vehiculos con dueños vip (clase con isVip?)
- * El otro es infinito (dinamico) pero las posiciones no son simetricas (????) y pueden tener difs tamaños.
+ * El otro es infinito (dinamico) pero las posiciones pueden tener difs tamaños.
  * Estos tamaños son mini, standard, o max. un vehiculo mas chico puede entrar en un coso mas grande pero no es ideal.
  * (probablemente hay que chequear que agujeros hay)
  * 
@@ -75,18 +118,12 @@
  * Se pide que el sistema pueda generar automaticamente muchos vehiculos y posiciones del estacionamiento  con atrib
  * aleatorios. (probablemente en el cuantico)
  * 
- * Funcionalidades:
- * -Listar todos los vehiculos
- * -Agregar un vehiculo (con atributos aleatorios o no)
- * -Remocer un vehiculo en base a su numero de matricula
- * -Remover un vehiculo en base al dni del dueño
- * -Remover una cant aleatoria de vehiculos. 
- * -Optimizar el espapcio, moviendo todos los vehiculos que no esten ocupando una casilla corespondiente
- * de su espacio actual a uno nuevo (se puede poner en un temp)
- * 
  * 
  * So...
  * -Generar clase Car
  * Armar el estacionamiento 1 
  * Armar el estacionamiento 2 con rng
  */
+
+//la cosa de los espacios y sus tamaños. 
+//mejorar el loadrandomdata

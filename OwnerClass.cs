@@ -16,13 +16,25 @@ namespace ApertureLabsGallino
             Random randDNI = new Random();
             this.dni = randDNI.Next(1, 99999999); //Genera un dni entre 1 y 8 digitos
             Random randVip= new Random();
-            if (randVip.Next(1, 2) % 2 == 0) //genera un trueFalse
+            if (randVip.Next(1, 10) % 2 == 0) //genera un trueFalse
             {
                 this.isVip = true;
             }
             else
             {
                 this.isVip = false;
+            }
+        }
+        public void Show()
+        {
+            Console.WriteLine($"Owner DNI: {this.dni}");
+            if (this.isVip == true)
+            {
+                Console.WriteLine("VIP: Yes");
+            }
+            else
+            {
+                Console.WriteLine("VIP: No");
             }
         }
     }
