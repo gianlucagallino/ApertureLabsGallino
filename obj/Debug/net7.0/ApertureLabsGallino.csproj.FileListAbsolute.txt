@@ -1,0 +1,14 @@
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\bin\Debug\net7.0\ApertureLabsGallino.exe
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\bin\Debug\net7.0\ApertureLabsGallino.deps.json
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\bin\Debug\net7.0\ApertureLabsGallino.runtimeconfig.json
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\bin\Debug\net7.0\ApertureLabsGallino.dll
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\bin\Debug\net7.0\ApertureLabsGallino.pdb
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\ApertureLabsGallino.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\ApertureLabsGallino.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\ApertureLabsGallino.AssemblyInfo.cs
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\ApertureLabsGallino.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\ApertureLabsGallino.dll
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\refint\ApertureLabsGallino.dll
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\ApertureLabsGallino.pdb
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\ApertureLabsGallino.genruntimeconfig.cache
+C:\Users\User\Desktop\C#\Aperture\ApertureLabsGallino\obj\Debug\net7.0\ref\ApertureLabsGallino.dll
