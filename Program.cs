@@ -1,4 +1,6 @@
-﻿namespace ApertureLabsGallino
+﻿using System.ComponentModel.Design;
+
+namespace ApertureLabsGallino
 {
     internal class Program
     {
@@ -12,7 +14,7 @@
             List<Car> QuantumParking = new List<Car>();
 
 
-            LoadRandomData(NormalParking,QuantumParking);
+            LoadRandomData(NormalParking, QuantumParking);
 
             while (isRunning)
             {
@@ -35,16 +37,16 @@
                 switch (menuPick)
                 {
                     case "1":
-                        ListAllVehicles(NormalParking, QuantumParking);
+                        ListAllVehicles();
                         break;
                     case "2":
-                        //AddNewVehicle();
+                        AddNewVehicle();
                         break;
                     case "3":
-                        //RemoveVehicleByLP();
+                        RemoveVehicleByLP();
                         break;
                     case "4":
-                        //RemoveVehicleByDNI();
+                        RemoveVehicleByDNI();
                         break;
                     case "5":
                         //RemoveRandomAmount();
@@ -63,7 +65,7 @@
 
             void LoadRandomData(Car[] Normal, List<Car> Quantum)
             {
-                for (int i = 0; i<Normal.Length;i++) //Esto llena el estacionamiento normal, para poder llegar a usar el quantum 
+                for (int i = 0; i < Normal.Length; i++) //Esto llena el estacionamiento normal, para poder llegar a usar el quantum 
                 {
                     Normal[i] = new Car();
                     if ((i == 3 || i == 7 || i == 12) && (Normal[i].CheckVip() == false))
@@ -76,21 +78,131 @@
                     }
                 }
                 Random QuantumCarAmount = new Random();
-                for (int i = 0; i< QuantumCarAmount.Next(1, 100); i++)
+                for (int i = 0; i < QuantumCarAmount.Next(1, 100); i++)
                 {
                     Quantum.Add(new Car());
                 }
             }
 
-            void ListAllVehicles(Car[] Normal, List<Car> Quantum)
+            void ListAllVehicles()
             {
-                foreach (Car Vehicle in Normal)
+                foreach (Car Vehicle in NormalParking)
                 {
-                    Vehicle.Show();
+                    if (Vehicle.model != "Deleted")
+                    {
+                        Vehicle.Show();
+                    }
                 }
-                foreach (Car Vehicle in Quantum)
+                foreach (Car Vehicle in QuantumParking)
                 {
-                    Vehicle.Show();
+                    if (Vehicle.model != "Deleted")
+                    {
+                        Vehicle.Show();
+                    }
+                }
+                Console.Out.WriteLine("(Press any key) ");
+                Console.In.ReadLine(); //No guarda el input, es una pausa.
+            }
+
+            void AddNewVehicle()
+            {
+
+                Console.Out.WriteLine("Press 1 to load vehicle values, Press 2 to write random values. ");
+                string pick = Console.In.ReadLine();
+                if (pick != "1" && pick != "2")
+                {
+                    Console.WriteLine("Wrong value inserted. Going back to main menu.");
+                    Console.In.ReadLine(); //No guarda el input, es una pausa.
+                    return;
+                }
+                else if (pick == "1")
+                {
+                    WriteVehicleData();
+                }
+                else WriteVehicleRandom();
+            }
+
+            long CheckAvailability()
+            {
+                for (int i = 0; i < NormalParking.Length; i++)
+                {
+                    if (NormalParking[i].model == "Deleted")
+                    {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+
+            void WriteVehicleData()
+            {
+                Car newCar = new Car();
+                if (newCar.load() == true)
+                {
+                    if (CheckAvailability() == -1)
+                    {
+                        QuantumParking.Add(newCar);
+                    }
+                    else
+                    {
+                        NormalParking[CheckAvailability()] = newCar;
+                    }
+                }
+            }
+
+            void WriteVehicleRandom()
+            {
+                Car newCar = new Car();
+                if (CheckAvailability() == -1)
+                {
+                    QuantumParking.Add(newCar);
+                }
+                else
+                {
+                    NormalParking[CheckAvailability()] = newCar;
+                }
+            }
+
+            void RemoveVehicleByLP()
+            {
+                Console.Out.WriteLine("Enter a plate number");
+                long plateValue = Convert.ToInt64(Console.In.ReadLine());
+                string plate = "apert" + plateValue;
+
+                foreach (Car Vehicle in NormalParking)
+                {
+                    if (Vehicle.licensePlate == plate)
+                    {
+                        Vehicle.model = "Deleted"; //sets model as deleted so its ignored & able to be overwritten
+                    }
+                }
+                foreach (Car Vehicle in QuantumParking)
+                {
+                    if (Vehicle.licensePlate == plate)
+                    {
+                        QuantumParking.Remove(Vehicle);
+                    }
+                }
+                Console.Out.WriteLine("(Press any key) ");
+                Console.In.ReadLine(); //No guarda el input, es una pausa.
+            }
+
+            void RemoveVehicleByDNI(){
+                Console.WriteLine("Enter DNI");
+                long dniValue = Convert.ToInt64(Console.In.ReadLine());
+                foreach (Car Vehicle in NormalParking)
+                {
+                    if (Vehicle.carOwner.dni == dniValue)
+                    {
+                        Vehicle.model = "Deleted"; //sets model as deleted so its ignored & able to be overwritten
+                    }
+                }
+                foreach (Car Vehicle in QuantumParking)
+                {
+                    if (Vehicle.carOwner.dni == dniValue)
+                    {
+                        QuantumParking.Remove(Vehicle);
+                    }
                 }
                 Console.Out.WriteLine("(Press any key) ");
                 Console.In.ReadLine(); //No guarda el input, es una pausa.
@@ -118,12 +230,7 @@
  * Se pide que el sistema pueda generar automaticamente muchos vehiculos y posiciones del estacionamiento  con atrib
  * aleatorios. (probablemente en el cuantico)
  * 
- * 
- * So...
- * -Generar clase Car
- * Armar el estacionamiento 1 
- * Armar el estacionamiento 2 con rng
  */
 
 //la cosa de los espacios y sus tamaños. 
-//mejorar el loadrandomdata
+//los load tampoco respetan los vip spaces

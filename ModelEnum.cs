@@ -12,7 +12,7 @@ namespace ApertureLabsGallino
         NISSAN_SKYLINE,
         TOYOTA_SUPRA,
         MITSUBISHI_LANCER_EVOLUTION,
-        SUBARU_WRXSTI,
+        SUBARU_WRX_STI,
         MAZDA_RX7,
         SCION_FRS,
         LEXUS_RCF,
