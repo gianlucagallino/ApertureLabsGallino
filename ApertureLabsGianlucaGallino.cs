@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ApertureLabsGallino
 {
-    internal class Program
+    internal class ApertureLabsGianlucaGallino
     {
         static void Main(string[] args)
         {
@@ -15,7 +15,7 @@ namespace ApertureLabsGallino
             string menuPick;
             Car[] NormalParking = new Car[12];
             List<Car> QuantumParking = new List<Car>();
-            List<Car> QuantumTemporary = new List<Car>();  
+            List<Car> QuantumTemporary = new List<Car>();
             List<long> QuantumSpaces = new List<long>();
 
 
@@ -84,9 +84,9 @@ namespace ApertureLabsGallino
                     }
                 }
 
-                Random RNG= new Random();
+                Random RNG = new Random();
                 long QuantumToOccupy = RNG.Next(1, 100);
-                
+
                 //Este loop arma espacios de 1 de las 3 categorias. 1 = min 2=prom 3=max
                 for (int i = 0; i < QuantumToOccupy; i++)
                 {
@@ -104,10 +104,10 @@ namespace ApertureLabsGallino
                 foreach (Car Vehicle in QuantumTemporary)
                 {
                     long count = 0;
-                    foreach(long Space in QuantumSpaces)
+                    foreach (long Space in QuantumSpaces)
                     {
                         count++;
-                        if (Vehicle.sizeType == Space && QuantumSpaces.ElementAt((Index)(count-1))==0) //Esto revisa que ese espacio no este ocupado. 
+                        if (Vehicle.sizeType == Space && QuantumSpaces.ElementAt((Index)(count - 1)) == 0) //Esto revisa que ese espacio no este ocupado. 
                         {
                             QuantumSpaces[QuantumSpaces.Count - 1] = 1;
                             QuantumParking.Add(Vehicle);
@@ -196,8 +196,8 @@ namespace ApertureLabsGallino
                     {
                         if (CheckAvailability() == 3 || CheckAvailability() == 7 || CheckAvailability() == 12)
                         {
-                            if (newCar.carOwner.isVip== true) NormalParking[CheckAvailability()] = newCar;
-                           else QuantumTemporary.Add(newCar);
+                            if (newCar.carOwner.isVip == true) NormalParking[CheckAvailability()] = newCar;
+                            else QuantumTemporary.Add(newCar);
                             newCar.model = "Deleted";
                         }
                         else
@@ -243,7 +243,7 @@ namespace ApertureLabsGallino
                         Vehicle.model = "Deleted"; //sets model as deleted so its ignored & able to be overwritten
                     }
                 }
-                for (int i = 0; i<QuantumParking.Count;i++)
+                for (int i = 0; i < QuantumParking.Count; i++)
                 {
                     if (QuantumParking[i].licensePlate == plate)
                     {
@@ -295,7 +295,7 @@ namespace ApertureLabsGallino
 
             void OptimiseParkingSpaces()
             {
-                for (int i = 0; i<QuantumParking.Count;i++)
+                for (int i = 0; i < QuantumParking.Count; i++)
                 {
                     if (QuantumParking[i].sizeType != QuantumSpaces[i])
                     {
