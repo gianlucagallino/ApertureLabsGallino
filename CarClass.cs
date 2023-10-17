@@ -15,7 +15,7 @@ namespace ApertureLabsGallino
         public string licensePlate;
         double width;
         double length;
-        short sizeType; // 1=mini, 2=standard, 3=max
+        public short sizeType; // 1=mini, 2=standard, 3=max
 
         public void determineSize(double wdth, double lgth)
         {
